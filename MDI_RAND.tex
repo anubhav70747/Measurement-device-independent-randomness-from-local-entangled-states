@@ -1,0 +1,470 @@
+\documentclass[doublecol,linenumbers]{epl2} % for 2 columns style with line numbers
+
+% or \documentclass[doublecol]{epl2} for 2 columns style without line numbers
+% or \documentclass[page-classic,linenumbers]{epl2} for one column style with line numbers
+% or \documentclass[page-classic]{epl2} for one column style without line numbers
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amssymb}
+%\usepackage{graphics,epstopdf}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{float}
+%\usepackage{graphics}
+\usepackage{amsfonts}
+
+%\newcommand\emc{E=mc^{2}}
+
+\title{Measurement-device-independent randomness from local entangled states}
+%\shorttitle{Title} %Insert here a short version of the title if it exceeds 70 characters
+
+
+\author{Anubhav Chaturvedi$^1$, Manik Banik$^{2,3}$}
+%\shortauthor{F. Author \etal}
+
+\institute{(1) Center for Computational Natural Sciences and Bio-informatics, IIIT-Hyderabad, Hyderabad 500032, India.\\
+           (2) The Institute of Mathematical Sciences, CIT Campus, Tharamani, Chennai 600113, India.\\
+	   (3) Physics and Applied Mathematics Unit, Indian Statistical Institute, 203 B.T. Road, Kolkata 700108, India.}
+
+%\author{Manik Banik}
+\shortauthor{A. Chaturvedi \etal}
+
+%\institute{Physics and Applied Mathematics Unit, Indian Statistical Institute, 203 B.T. Road, Kolkata 700108, India}
+%\pacs{03.65.Ud}{First pacs description}
+%\pacs{03.67.Dd}{Second pacs description}
+%\pacs{nn.mm.xx}{Third pacs description}
+
+
+\abstract{Nonlocal correlations are useful for device independent (DI) randomness certification [\href{http://www.nature.com/nature/journal/v464/n7291/full/nature09008.html} {Nature (London) {\bf 464}, 1021 (2010)}]. The advantage of this DI protocol over the conventional quantum protocol is that randomness can be certified even when experimental apparatuses are not trusted. Although quantum entanglement is the necessary physical source for nonlocal correlation, these two are distinct concepts. There exist entangled states which produce no nonlocal correlation and hence are not useful for the DI randomness certification task. Here we introduce the measurement-device-independent randomness certification task and show that entangled states, having local description, can be useful resource in such task which otherwise are useless in corresponding DI scenario.}
+
+\begin{document}
+
+\maketitle
+\section{Introduction}
+Randomness is a valuable resource for various important tasks ranging from cryptographic applications \cite{Crypto} to numerical simulations such as \emph{Monte Carlo} method \cite{Monte}. Algorithmic information theory shows that true randomness cannot exist from a mathematical point of view \cite{Chaitin,Knuth}. Thus generation of randomness must be based on unpredictability of physical phenomena so that the random nature is guaranteed by the laws of physics. Classical physics being fundamentally deterministic in nature cannot guarantee such randomness \cite{Butterfield}. on the other hand, though the outcomes of measurement performed on quantum system are intrinsically random (due to Born rule) \cite{Born,Neumann}, but real-life implementation of such randomness generation procedures \cite{Jennewein,Stefanov,Atsushi} further demand idealized modeling and detailed knowledge about the internal working process of the devices used for generating randomness. To overcome this issue, nonlocality based \cite{Ekert,Barrett_1,Masanes} and device independent (DI) technique \cite{Mayers,Acin_1,Colbeck,Pironio_1} has been applied for generating randomness. In Ref.\cite{Pironio_2}, Pironio \emph{et al.} have shown that the correlation of entangled quantum particles can be used to certify the presence of genuine randomness and they have designed cryptographically secure random number generator which does not require any assumption on the internal working of the devices. The key point is that randomness in the outcomes of measurements performed on the separated parts of the  entangled quantum systems can be certified in DI way if the correlation obtained from the entangled state violates a Bell inequality (BI). But, it is well known that nonlocality \cite{Brunner} and entanglement \cite{Horodecki} are two distinct concepts. Not all entangled states violate BI, rather there exists entangled states for which measurement statistics can be simulated locally \cite{Werner}. Therefore, such \emph{local} entangled states are not useful resource for DI randomness certification. In this work we first introduce the measurement-device-independent (MDI) randomness certification protocol, where the quantum state preparation device behave quantum mechanically but the measurement device is completely untrusted. In such scenario we show that \emph{local} entangled states can be potentially useful resource for randomness certification task which otherwise are not useful for DI randomness certification. 
+
+The concept of MDI information processing scenario has been  independently introduced in Ref.\cite{Braunstein} and Ref.\cite{Lo}, where the authors have presented the idea of MDI-quantum key distribution (MDI-QKD) protocol. Recently, Branciard \emph{et al.} have shown that presence of entanglement can be demonstrated in MDI way \cite{Branciard}. To arrive at their conclusion Branciard \emph{et al.} have used a recent result of Buscemi \cite{Buscemi}, which shows that all entangled states provide an advantage over the separable states for some a \emph{semi quantum} game.
+
+In this work we first introduce the MDI randomness certification task. Using the result of \cite{Branciard} we then show that entangled states which are not useful for DI randomness certification can be useful resource in this scenario. More precisely we consider the two-qubit entangled Werner states $\varrho^v=v|\psi^-\rangle\langle\psi^-|+(1-v)\frac{\mathbb{I}}{2}\otimes \frac{\mathbb{I}}{2}$. It is known that Werner states with visibility parameter $v>1/3$ are entangled and a subclass of these states (states with $v>1/\sqrt{2}$) violates BI and hence are useful for DI randomness certification. On the other hand Werner states with $v\le 1/2$ and $v\le 5/12$ have local description for projective measurement and positive operator valued measurement (POVM), respectively and thus cannot be useful for DI randomness certification. We show that all these entangled Werner states are useful for MDI randomness certification.
+
+
+
+\section{Bell scenario and  DI randomness}\label{sec2}
+
+A bipartite Bell scenario with $m$ different measurements per subsystem, each measurement having $d$ possible results, is characterized by the joint probabilities $P_{AB|XY}=\{p(ab|xy)\}$, with measurement results denoted by $a,b\in \{1,2,...,d\}$ and measurements denoted by $x,y\in \{1,2,...,m\}$. The quantum distribution $P_{AB|XY}^Q$ is of the form
+\begin{equation}\label{defQ}
+p(ab|xy)=\mbox{Tr} [M_{a|x}\otimes M_{b|y} \rho]
+\end{equation}
+where $\rho$ is a quantum state (density operator) in some tensor product Hilbert space $\mathcal{H}_A\otimes \mathcal{H}_B$ and $\{M_{a|x}~|~M_{a|x}\ge 0~\forall a;~\sum_{a}M_{a|x}=\mathbb{I}_{\mathcal{H}_A}\}$, $\{M_{b|y}~|~M_{b|y}\ge 0~\forall b;~\sum_{b}M_{b|y}=\mathbb{I}_{\mathcal{H}_B}\}$ are positive operator valued measures (POVMs) \cite{Nielson}. \textcolor{red}{The set of quantum statistics $P_{AB|XY}^Q$ is referred to as $Q$  }. A Bell expression $I =\sum_{abxy}c_{abxy}p(ab|xy)$ is a linear combination of the probabilities specified by the coefficients $\{c_{abxy}\}$. Correlations which can be expressed as $P(ab|xy)=\int_{\lambda}d\lambda\rho(\lambda)P(a|x,\lambda)P(b|y,\lambda)$ with $\lambda$ being the shared random variable, admit {\em local realistic} description and satisfy the condition $I\le I_L$, where $I_L$ is called the local bound of the BI. Interestingly, there exists entangled quantum states which violate BI and such correlations are called nonlocal correlations (see \cite{Brunner} for a review on Bell's nonlocality). Note that BI is derived under conjunction of the assumptions called \emph{reality} and \emph{locality} (along with \emph{measurement independence}). Violation of BI by quantum correlations implies that quantum mechanics is not reconcilable with these assumptions. As these assumptions refer to properties of a ontological (hidden-variable) model \cite{Rudolph}, thus from the observed BI violation it is impossible to conclude which one of these assumptions is violated. Interestingly, the BI can be derived under two operational assumptions, namely, \emph{predictability} and \emph{signal locality} \cite{Cavalcanti}. As the operational assumption of signal locality is an empirically testable (and well-tested) consequence of relativity, thus BI violation implies that events are unpredictable. This alternative derivation of BI from operational assumptions plays important role in the practical question of randomness certification even when the experimental devices are not trusted. 
+
+In DI randomness certification scenario one (Say Alice) has a private place which is completely inaccessible from the outside i.e., no illegitimate system may enter in this place. From a cryptographic point of view assumption of such private place is admissible. Alice \textcolor{red}{chooses} classical inputs $x\in X$ and $y\in Y$ with probability distributions $\mathcal{P}_X(x)$ and $\mathcal{P}_Y(y)$, respectively, and sends them to two measurement devices ($\mathcal{MD}1$ and $\mathcal{MD}2$ respectively) through some secure classical communication channels. The inputs prescribe the  measurement devices to perform some POVM $\{M_{a|x}~|~M_{a|x}\ge 0~\forall a;~\sum_{a}M_{a|x}=\mathbb{I}_{\mathcal{H}_A}\}$ and $\{M_{b|y}~|~M_{b|y}\ge 0~\forall b;~\sum_{b}M_{b|y}=\mathbb{I}_{\mathcal{H}_B}\}$ on some quantum state $\rho$, shared between the two devices. Once the inputs are received, no classical communication between the measurement devices $\mathcal{MD}1$ and $\mathcal{MD}2$ is allowed. Alice collects the input-output statistics $P(AB|XY)=\{p(ab|xy)\}$. 
+\begin{figure}[b]
+\centering
+\includegraphics[height=5cm,width=7cm]{fig1.pdf}
+\caption{Setup for DI randomness certification. Classical inputs are sent from Alice's private place to the measurement devices ($\mathcal{MD}1$ and $\mathcal{MD}2$) through secure classical channels. Classical communication is not allowed between two measurement devices.}\label{fig1}
+\end{figure}
+Since no communication between two measurement devices is allowed (i.e signal locality assumption is satisfied) hence BI violation implies that operational \textcolor{red}{statistics} must be unpredictable. Therefore randomness can be certified against an \textcolor{red}{Eavesdropper with control of specifying the details of the experimental device}. The setup for DI randomness certification is depicted in Fig.\ref{fig1}. 
+
+
+The amount of randomness associated with the measurement outcome is quantified by guessing probability $G(x,y,\mathcal{K})= \max_{a,b}p(ab|xy,\mathcal{K})$ \cite{Acin_2} \textcolor{red}{of a malicious Eavesdropper who prepares the experimental devices}. Here $p(ab|xy,\mathcal{K})$ are the joint outcome probabilities and $\mathcal{K}$ denotes the shared resources between the two spatially separated system. \textcolor{red}{If the Eavesdropper is restricted by quantum theory then she prepares $\mathcal{K}$ as any bipartite quantum state. On the other hand, if she is restricted only by no signaling (NS) principle then $\mathcal{K}$ can be any correlation satisfying NS principle. The quantity $G$ corresponds to the $Eave's$ probability to guess correctly the outcome pair $(a,b)$, since the best guess is simply to output the most probable pair}. This guessing probability can be expressed in bits and is then known as the min-entropy, $H_{\infty}(x,y,\mathcal{K})=-\log_2G(x,y,\mathcal{K})$ \cite{Koenig}. In \cite{Pironio_2}, Pironio \emph{et al.} have shown that whenever a bipartite input-output probability distributions violates BI there is nonzero min-entropy associated with the outputs. To obtain the minimum randomness in quantum theory one has to perform the following optimization problem: 
+\begin{eqnarray}\label{rand_quantum}
+p^*_q(ab|xy)&=&~~~~~~\mbox{max}~~~~~~p(ab|xy)\nonumber\\
+&&\mbox{subject~to}~~\sum_{abxy}c_{abxy}p(ab|xy)=I\nonumber\\
+&& p(ab|xy)\in Q.
+\end{eqnarray}
+\textcolor{red}{where the last condition ensures that the obtained correlation is of the form \ref{defQ}}. Adapting a straightforward way of technique \textcolor{red}{ for approximating the set of quantum correlations using a semi-definite-programs (SDP) as introduced in \cite{Navascues}, one can efficiently lower bound min-entropy obtainable from a quantum correlation}. The minimum random bits obtained in quantum theory corresponding to BI violation $I$ is thus $H_\infty(AB|XY)=-\log_2\max_{ab}p_q^*(ab|xy)$. One may, however, be interested in the amount of minimum randomness obtained in NS theory; which mean that instead of the quantum state any correlation satisfying NS condition is allowed to share between the measurement devices (see \cite{Pironio_2} for NS analysis). 
+
+
+\section{Semi-quantum nonlocal game scenario}\label{sec3}
+Recently, Buschemi generalizes the standard Bell game scenario into semi quantum scenario \cite{Buscemi}. In this case Alice chooses classical inputs $x\in X$ and $y\in Y$ with probability distributions $\mathcal{P}_X(x)$ and $\mathcal{P}_Y(y)$, respectively. But, instead of sending these classical inputs to the measurement devices she encodes the information of these inputs into sets of quantum states $\{|\phi^x\rangle_{\alpha'}\}_{x\in X}$ and $\{|\psi^y\rangle_{\beta'}\}_{y\in Y}$, chosen from Hilbert spaces $\mathcal{H}_{\alpha'}$ and $\mathcal{H}_{\beta'}$, respectively. The quantum states $|\phi^x\rangle$ and $|\psi^y\rangle$ are then send to the measurement devices $\mathcal{MD}1$ and $\mathcal{MD}2$, respectively, through quantum channels. Given these quantum states the respective measurement device $\mathcal{MD}1$ and $\mathcal{MD}2$ produce outcomes $a$  and $b$, respectively, by performing POVMs on the composite system i.e. the system obtained from Alice and the part of a bipartite state $\rho_{\alpha\beta}$, shared between the two measurement devices $\mathcal{MD}1$ and $\mathcal{MD}2$. The output probability  is 
+\begin{eqnarray}\label{defQ!}
+p_{\rho_{\alpha\beta}}(ab||\phi^x\rangle_{\alpha'},|\psi^y\rangle_{\beta'})
+=\mbox{tr}[(\mathcal{M}^{\alpha'\alpha}_a\otimes \mathcal{M}^{\beta\beta'}_b)\nonumber\\
+(|\phi^x\rangle_{\alpha'}\langle\phi^x|\otimes \rho_{\alpha\beta}\otimes |\psi^y\rangle_{\beta'}\langle\phi^y|)],
+\end{eqnarray}  
+where $\mathcal{M}^{\alpha'\alpha}_a$ ($\mathcal{M}^{\beta\beta'}_b$) is the element of the POVM performed on the composite system $\mathcal{H}_{\alpha'}\otimes \mathcal{H}_{\alpha}$ ($\mathcal{H}_{\beta}\otimes \mathcal{H}_{\beta'}$) to produce the outcomes $a$ and $b$.\textcolor{red}{\ref{defQ!} can also be written as,}
+\begin{eqnarray}\label{defQ1}
+p_{\rho_{\alpha\beta}}(ab||\phi^x\rangle_{\alpha'},|\psi^y\rangle_{\beta'})
+=\mbox{Tr} [M_{a||\phi^x\rangle_{\alpha'}}\otimes M_{b||\psi^y\rangle_{\beta'}} \rho_{\alpha\beta}],
+\end{eqnarray}
+\textcolor{red}{where the operators $M_{a||\phi^x\rangle_{\alpha'}}=$ and $M_{b||\psi^y\rangle_{\beta'}}$ describe Alice and Bob’s effective POVMs acting on $\rho_{\alpha\beta}$ given $|\phi^x\rangle_{\alpha'},|\psi^y\rangle_{\beta'}$. We shall refer to the set of quantum probabilities of the form \ref{defQ1} as $Q$}.
+In this generalized framework Buscemi proved that if the shared state between the measurement devices $\mathcal{MD}1$ and $\mathcal{MD}2$ is entangled one then Alice can choose the input quantum states in such way that the produced correlation cannot be achieved by local operation and shared randomness (LOSR). Later it has been shown that in this scenario any entangled state can generate correlations that cannot be simulated by local operation and classical correlation (LOCC) even if there is no restriction on the amount of classical communication \cite{Rosset}, but that such correlations can be simulated if the distribution of the shared variables depends on the input quantum states i.e., it the measurement independence assumptions have been reduced \cite{Banik}. Using these semi quantum game framework, in the following, we explicitly show that all two-qubit entangled Werner states are useful for MDI randomness certification. 
+
+We consider the following particular semi-quantum game. The input quantum states are chosen from a regular tetrahedron on the Bloch sphere i.e., 
+\begin{equation}\label{qstate}
+|\phi^x\rangle\langle\phi^x|=\frac{\mathbb{I}+\vec{v}_x.\vec{\sigma}}{2},
+~~|\psi^y\rangle\langle\psi^y|=\frac{\mathbb{I}+\vec{v}_y.\vec{\sigma}}{2},
+\end{equation}     
+for $x,y=1,..,4$ we have $\vec{v}_1=\frac{(1,1,1)}{\sqrt{3}}$, $\vec{v}_2=\frac{(1,-1,-1)}{\sqrt{3}}$, $\vec{v}_3=\frac{(-1,1,-1)}{\sqrt{3}}$ and $\vec{v}_4=\frac{(1,-1,-1)}{\sqrt{3}}$; and $\vec{\sigma}=(\sigma_1,\sigma_2,\sigma_3)$ with $\sigma_i$ ($i=1,2,3$) being the Pauli matrices. The POVM $\{\mathcal{M}^{\alpha'\alpha}_a\}_{a\in \{0,1\}}$ is given by 
+\begin{equation}
+\mathcal{M}^{\alpha'\alpha}_1=|\phi^+\rangle\langle\phi^+|,~~\mathcal{M}^{\alpha'\alpha}_0=\mathbb{I}-|\phi^+\rangle\langle\phi^+|,
+\end{equation}
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm,width=7cm]{fig2.pdf}
+\caption{Setup for MDI randomness certification. Alice has perfect state preparation device (PD) at her private place. Quantum states are sent from Alice's private place to the measurement devices through secure quantum channels. Classical communication is allowed between two measurement devices but no quantum state transfer is allowed.}\label{fig2}
+\end{figure}
+where $|\phi^+\rangle=\frac{|00\rangle+|11\rangle}{\sqrt{2}}$. Same POVM is considered at Bob's end $\{\mathcal{M}^{\beta\beta'}_b\}_{b\in \{0,1\}}$. \textcolor{red}{The probability distribution admitted when $\rho_{\alpha\beta}$ is a singlet state is,
+\begin{equation}\label{p1}
+p(a,b||\phi^x\rangle,|\psi^y\rangle)=    \begin{cases}
+\frac{2-(a+b)}{4}, & \text{if}\ x=y\\
+\frac{7-5a-5b+4ab}{12}, & \text{if}\ x \neq y\\
+\end{cases}
+\end{equation}
+Notice The probability distribution admitted when $\rho_{\alpha\beta}$ is $\frac{\mathbb{I}}{4}$,
+\begin{equation}\label{p2}
+p(a,b||\phi^x\rangle,|\psi^y\rangle)=    \begin{cases}
+\frac{9}{16}, & \text{if}\ a=0 \text{and}\ b=0\\
+\frac{3}{16}, & \text{if}\ (a \oplus b=1) \\
+\frac{3}{16}, & \text{if}\ a=1 \text{and}\ b=1 \\
+\end{cases}
+\end{equation}
+for all $x,y$. The Werner state is a classical mixture of these two states and hence the prbability distribution. 
+}
+It is known that $W=\frac{\mathbb{I}}{2}-|\psi^-\rangle\langle\psi^-|$ is an entanglement witness for the two-qubit Werner state $\varrho^v$ \cite{Toth}. For Werner state $\varrho^v$, $\mbox{tr}[\varrho^vW]=\frac{1-3v}{4}$, which is negative for $v>\frac{1}{3}$ and $\mbox{tr}[\rho W]>0$ for any separable state $\rho$. From this entanglement witness operator Branciard \emph{et al.} have constructed the following MDI-entanglement witness \cite{Branciard}:
+\begin{equation}\label{mdi-ew}
+I(P)=\frac{5}{8}\sum_{x= y}p(1,1||\phi^x\rangle,|\psi^y\rangle)-\frac{1}{8}\sum_{x\ne y}p(1,1||\phi^x\rangle,|\psi^y\rangle)
+\end{equation}     
+here $P$ denotes the probability distribution $\{p(a,b||\phi^x\rangle,|\psi^y\rangle)|a,b=0,1;x,y=1,..,4\}$. For the Werner states the above expression becomes $I(P_{\varrho^v})=\frac{1-3v}{16}$, which is negative for $v>\frac{1}{3}$. For any separable state $\rho$, $I(P_{\rho})=0$, as separable states are the end points of the semi-quantum game relation `$\succcurlyeq_{sq}$' defined in \cite{Buscemi}.  
+
+
+\section{MDI randomness certification}\label{sec4}
+We are now in the position to show that randomness can be certified by all two-qubit entangled Werner states when the measurement apparatuses are not trusted. The set up for MDI randomness certification is depicted in Fig.\ref{fig2}. Here, in contrast to the DI randomness certification scenario (Fig.\ref{fig1}), Alice has a perfect state preparation device at her private place. The quantum states, chosen from the set described in Eq.(\ref{qstate}) are prepared by Alice and are sent to measurement devices $\mathcal{MD}1$ and $\mathcal{MD}2$ through quantum channels. No leakage of the information about the classical index $x$ (or $y$) is allowed. In DI scenario, after sending the classical index $x$ and $y$ to the respective measurement devices no classical communication is allowed between the measurement devices. In this case no such restriction is required. But after receiving the quantum states from Alice any kind of quantum state transfer is prohibited between the two measurement devices. When the quantum states reach to the measurement devices, both the devices produce classical outcomes $a,b\in \{1,0\}$. Alice collects the input-output statistics and tests whether the the collected data satify certain conditions.
+
+
+{\bf Results}:
+To find the minimum randomness for Werner state with visibility parameter $v\in[\frac{1}{3},1]$ one has to solve the optimization problem,
+
+\begin{eqnarray}\label{mdi_rand_quantum}
+p^*_q(ab|xy)&=&~~~~~~\mbox{max}~~~~~~p(ab|xy)\nonumber\\
+&&\mbox{subject~to}~~I(P_{\varrho^v})=\frac{1-3v}{16}\nonumber\\
+&& p(ab|xy)\in Q.
+\end{eqnarray}
+The minimum random bits obtained in quantum theory corresponding to Werner state visibility parameter $v$ is thus $H_\infty(AB|XY)=-\log_2\max_{ab}p_q^*(ab|xy)$. While the optimization problem \ref{mdi_rand_quantum} is computationally tough, one can solve for a relaxed condition $p(ab|xy)\in Q_{1+AB}$ using SDP. Alternatively $p(ab|xy)\in NS$ can be used to quantify minimum random bits obtained from no-signaling principle.
+Our results point out that there is zero min-entropy for value of $I(P_{\varrho^v})\in {-\frac{1}{4},0}$ against a $Q_{1+AB}$ and no-signaling (see Appendix). 
+We know that change in the visibility parameter $v$ given Eave free runs of the protocol corresponds to movement on the line joining \ref{p1} and \ref{p2} in the probability distribution space (two party quadruple inputs binary output). Hence we look for characteristics of \ref{p1} and \ref{p2} that guarantee randomness along with $I(P_{\varrho^v})\in {-\frac{1}{4},0}$. .
+\subsection{Verifiable conditions on observed statistics}
+As the protocol used above is same up-to relabeling for outputs \ref{mdi-ew} in general can be written as,
+\begin{equation}\label{mdi-ew1}
+I(P)=\frac{5}{8}\sum_{x= y}p(i,j||\phi^x\rangle,|\psi^y\rangle)-\frac{1}{8}\sum_{x\ne y}p(i,j||\phi^x\rangle,|\psi^y\rangle)
+\end{equation}
+If $i=j=k$ Condition 1 and Condition 2 suffice and produce positive min-entropy for $k\in\{0,1\}$ for all entangled Werner states Fig. \ref{plot1}.
+
+\textbf{Condition 1}
+\begin{equation}
+P(0,1|l,l)=P(0,1|m,m)   \forall l,m\in \{1,2,3,4\} 
+\end{equation}
+That is, when Alice and Bob have the same input $l$ the probability of obtaining outcomes $a=0$ and $b=1$ should be the same for all l . \\
+\textbf{Condition 2}
+\begin{equation}
+P(1,0|l,l)=P(1,0|m,m) \forall l,m\in \{1,2,3,4\} 
+\end{equation}
+That is, when Alice and Bob have the same input $l$ the probability of obtaining outcomes $a=1$ and $b=0$ should be the same for all l.\\
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm,width=7cm]{plotMinE.pdf}
+\caption{The min-entropy statistics obtained by solving the optimization problem \ref{mdi_rand_quantum} using $Q_{1+AB}$ level of NPA hierarchy (blue) against visibility parameter $v$ under conditions 1 and 2.}\label{plot1}
+\end{figure}
+However for the case when $i\neq j$ the following two conditions produce the same statistics as in Fig. \ref{plot1}.\\
+\textbf{Condition 3}
+\begin{equation}
+P(0,0|l,l)=P(0,0|m,m) \forall l,m\in \{1,2,3,4\} 
+\end{equation}
+That is, when Alice and Bob have the same input $l$ the probability of obtaining outcomes $a=0$ and $b=0$ should be the same for all l. \\
+\textbf{Condition 4}
+\begin{equation}
+P(1,1|l,l)=P(1,1|m,m) \forall l,m\in \{1,2,3,4\}
+\end{equation}
+That is, when Alice and Bob have the same input $l$ the probability of obtaining outcomes $a=1$ and $b=1$ should be the same for all l. (For detailed results see Appendix) \\
+
+
+\section{Discussion}\label{sec5}
+
+Device independent randomness certification and generation are intense area of research which draws much attention in recent time. The key ingredient of these tasks is the  presence of nonlocal correlation which is physically obtained from quantum entangled states. But not all entangled states produce such nonlocal correlation and hence have no use in DI randomness certification. In this work we introduce the concept of MDI randomness certification task and using a recently proposed novel concept of \emph{semi-quantum nonlocal game} we show that all two-qubit entangled Werner states are useful in MDI randomness certification where some of these states are indeed useless in DI randomness certification. However, we have considered single shot scenario and the protocol presented here is not optimal one. It is interesting to find the optimal protocol. On the other, it is also interesting to study the MDI randomness certification task with other classes of \emph{Bell local} entangled states. In Ref.\cite{Koh} the authors have shown that relaxation of `measurement independence' assumption in Bell's theorem potentially enhance the adversary's capabilities in the task of randomness expansion. On the other hand in Ref.\cite{Banik} the author has shown that correlations achieved in SG can be simulated by reducing `measurement independence'. In light of these two results it will be interesting to study the effect of reduced `measurement independence' in MDI randomness certification task.
+
+\section{Acknowledgments}
+The author likes to thank G. Kar for simulating discussions. Discussions with D. Rosset at ISI-Kolkata and comments of A. Ac\'{i}n in a private communication are gratefully acknowledged. It is a great pleasure to thank T. Chakraborty for helping in improving the presentation of the manuscript.
+
+\begin{thebibliography}{0}
+\bibitem{Crypto} 
+\Name{D. E. Denning}
+\Book{Cryptography and Data Security} 
+\Publ{Addison-Wesley Publishing Company}
+\Year{1982}.
+
+\bibitem{Monte} 
+\Name{M. H. Kalos \and P.A. Whitlock}
+\Book{Monte Carlo Methods}
+\Publ{John Wiley \& Sons}
+\Year{1986}. 
+
+\bibitem{Chaitin} 
+\Name{GL. Chaitin}
+\REVIEW{IBM Journal of Research and Development}{21}{1977}{350-359}.
+
+\bibitem{Knuth} 
+\Name{D. Knuth}
+\Book{The Art of Computer Programming Vol. 2, Semi-numerical Algorithms}
+\Publ{Addison-Wesley Publishing Company}
+\Year{1981}.
+
+\bibitem{Butterfield} 
+\Name{J. Butterfield}
+\REVIEW{Routledge Encyclopedia of Philosophy}{3}{1998}{33-39}.
+
+\bibitem{Born} 
+\Name{M. Born}
+\REVIEW{Z. Phys.}{38}{1926}{803-827}.
+
+\bibitem{Neumann} 
+\Name{J. Von-Neumann}
+\Book{Mathematical Foundations of Quantum Mechanics}
+\Publ{Princeton University Press}
+\Year{1955}.
+
+\bibitem{Jennewein} 
+\Name{T. Jennewein, U. Achleitner, G. Weihs, H. Weinfurter \and A. Zeilinger}  
+\href{http://dx.doi.org/10.1063/1.1150518}{\REVIEW{Rev. Sci. Instrum.}{71}{2000}{1675}}. 
+
+\bibitem{Stefanov}
+\Name{A. Stefanov, N. Gisin, O. Guinnard, L. Guinnard \and H. Zbinden} \href{http://www.tandfonline.com/doi/abs/10.1080/09500340008233380#.UrPIldKhsnM} {\REVIEW{J. Mod. Opt.}{47}{2000}{595-598}}.  
+
+\bibitem{Atsushi} 
+\Name{U. Atsushi \emph{et al.}}
+\href{http://www.nature.com/nphoton/journal/v2/n12/full/nphoton.2008.227.html} {\REVIEW{Nature Photon.}{2}{2008}{728-732}}.
+
+\bibitem{Ekert} 
+\Name{A.K. Ekert}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.67.661} {\REVIEW{Phys. Rev. Lett.}{67}{1991}{661-663}}. 
+
+\bibitem{Barrett_1} 
+\Name{J. Barrett, L. Hardy \and A. Kent}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.95.010503} {\REVIEW{Phys. Rev. Lett.}{95}{2005}{010503-010507}}.
+
+\bibitem{Masanes} 
+\Name{L. Masanes}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.102.140501} {\REVIEW{Phys. Rev. Lett.}{102}{2009}{140501}}. 
+
+\bibitem{Mayers} 
+\Name{D. Mayers and A. Yao}
+\REVIEW{In FOCS'98: Proceedings of the 39th Annual Symposium on Foundations of Computer Science: Washington DC, USA, IEEE Computer Society pages 503-509, 1998}{}{}.
+
+\bibitem{Acin_1} 
+\Name{A. Ac\'{i}n, N. Brunner, N. Gisin, S. Massar, S. Pironio \and V. Scarani}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.98.230501} {\REVIEW{Phys. Rev. Lett.}{98}{2007}{230501}}.
+
+\bibitem{Colbeck} 
+\Name{R. Colbeck}
+\Book{PhD Dissertation}
+\Publ{University of Cambridge}
+\Year{2007}. 
+(See \href{http://arxiv.org/abs/0911.3814} {arXiv:0911.3814}).
+
+\bibitem{Pironio_1} 
+\Name{S. Pironio, A. Ac\'{i}n, N. Brunner, N. Gisin, S. Massar \and V. Scarani}
+\href{http://iopscience.iop.org/1367-2630/11/4/045021} {\REVIEW{New J. Phys.}{11}{2009}{045021}}. 
+
+\bibitem{Pironio_2}
+\Name{S. Pironio \emph{et al.}}
+\href{http://www.nature.com/nature/journal/v464/n7291/full/nature09008.html} {\REVIEW{Nature (London)}{464}{2010}{1021-1024}}.  
+
+\bibitem{Acin_2} 
+\Name{A. Ac\'{i}n, S. Massar \and S. Pironio}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.108.100402}{\REVIEW{Phys. Rev. Lett.}{108}{2012}{100402}}. 
+
+\bibitem{Fehr} 
+\Name{S. Fehr, R. Gelles \and C. Schaffner}
+\href{http://link.aps.org/doi/10.1103/PhysRevA.87.012335}{\REVIEW{Phys. Rev. A}{87}{2013}{012335}}. 
+ 
+\bibitem{Pironio_3} 
+\Name{S. Pironio \and S. Massar}
+\href{http://link.aps.org/doi/10.1103/PhysRevA.87.012336} {\REVIEW{Phys. Rev. A}{87}{2013}{012336}}. 
+
+\bibitem{Brunner} 
+\Name{N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani \and S. Wehner}
+\href{http://arxiv.org/abs/1303.2849} {\REVIEW{Rev. Mod. Phys.}{86}{2014}{419}}. 
+
+\bibitem{Horodecki} 
+\Name{R. Horodecki, P. Horodecki, M. Horodecki \and K. Horodecki} \href{http://link.aps.org/doi/10.1103/RevModPhys.81.865} {\REVIEW{Rev. Mod. Phys.}{81}{2009}{865}}.
+
+\bibitem{Werner} 
+\Name{R.F. Werner}
+\href{http://link.aps.org/doi/10.1103/PhysRevA.40.4277} {\REVIEW{Phys. Rev. A}{40}{1989}{4277}}; 
+\Name{J. Barrett}
+\href{http://link.aps.org/doi/10.1103/PhysRevA.65.042302} {\REVIEW{Phys. Rev. A}{65}{2002}{042302}};  
+\Name{A. Rai, MD R. Gazi, M. Banik, S. Das \and S. Kunkri}
+\href{http://iopscience.iop.org/1751-8121/45/47/475302/}{\REVIEW{J. Phys. A: Math. Theor.}{45}{2012}{475302}}. 
+  
+\bibitem{Braunstein} 
+\Name{S. L. Braunstein \and S. Pirandola}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.108.130502} {\REVIEW{Phys. Rev. Lett.}{108}{2012}{130502}}. 
+
+\bibitem{Lo} 
+\Name{H. K. Lo, M. Curty M \and B. Qi}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.108.130503} {\REVIEW{Phys. Rev. Lett.}{108}{2012}{130503}}.
+
+\bibitem{Inamori}  
+\Name{H. Inamori,  N. L\"{u}tkenhaus \and D. Mayers} \href{http://link.springer.com/article/10.1140]\%2Fepjd\%2Fe2007-00010-4}{\REVIEW{Eur. Phys. J. D}{41}{2007}{599-627}}. 
+
+\bibitem{Gottesman} 
+\Name{D. Gottesman, H. K. Lo, N. L\"utkenhaus \and J. Preskill} 
+\href{http://www.rintonpress.com/journals/qiconline.html#v5n6} {\REVIEW{Quantum Inf. Comput.}{4}{2004}{325}}.
+
+\bibitem{Branciard} 
+\Name{C. Branciard, D. Rosset, Y. C. Liang \and N. Gisin}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.110.060405} {\REVIEW{Phys. Rev. Lett.}{110}{2013}{060405}}. 
+
+\bibitem{Toth} 
+\Name{G. T\'{o}th \and O. G\"{u}hne}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.94.060501} {\REVIEW{Phys. Rev. Lett.}{94}{2005}{060501}}.
+
+\bibitem{Buscemi} 
+\Name{F. Buscemi}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.108.200401} {\REVIEW{Phys. Rev. Lett.}{108}{2012}{200401}}. 
+
+\bibitem{Rosset} 
+\Name{D. Rosset, C. Branciard, N. Gisin \and Y. Liang}
+\href{http://iopscience.iop.org/1367-2630/15/5/053025} {\REVIEW{New J. Phys.}{15}{2013}{053025}}.  
+
+\bibitem{Nielson} 
+\Name{M. A. Nielsen, and I. L. Chuang}
+\Book{Quantum Computation and Quantum Information}
+\Publ{Cambridge University Press}
+\Year{2000}.
+ 
+\bibitem{Bell} 
+\Name{J. S. Bell}
+\Book{Speakable and Unspeakable in Quantum Mechanics}
+\Publ{Cambridge University Press}
+\Year{2004}.
+
+\bibitem{CHSH} 
+\Name{J. F. Clauser, M. A. Horne, A. Shimony \and R. A. Holt}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.23.880} {\REVIEW{Phys. Rev. Lett.}{23}{1969}{880}}. 
+
+\bibitem{Popescu} 
+\Name{S. Popescu \and D. Rohrlich} 
+\href{http://link.springer.com/article/10.1007/BF02058098}{\REVIEW{Fond. Phys.}{24}{1994}{379-385}}.
+
+\bibitem{Rudolph} 
+\Name{T. Rudolph}
+\href{http://arxiv.org/abs/quant-ph/0608120}{arXiv:quant-ph/0608120};
+\Name{N. Harrigan \and R. W. Spekkens} \href{http://link.springer.com/article/10.1007\%2Fs10701-009-9347-0}{\REVIEW{Found. Phys.}{40}{2010}{125-157}}. 
+
+\bibitem{Cavalcanti} 
+\Name{E. G. Cavalcanti \and H. M. Wiseman}
+\href{http://link.springer.com/article/10.1007\%2Fs10701-012-9669-1}{\REVIEW{Found. Phys.}{42}{2012}{1329-1338}}. 
+
+\bibitem{Koenig} 
+\Name{R. Koenig, R. Renner \and C.Schaffner} \href{http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=5895072&searchWithin\%3Dp_First_Names\%3AR\%26searchWithin\%3Dp_Last_Names\%3ARenner\%26matchBoolean\%3Dtrue\%26queryText\%3D\%28p_Authors\%3ARenner\%2C+R\%29} {\REVIEW{IEEE Trans. Inf. Theory}{55}{2009}{4337}}. 
+
+\bibitem{Navascues} 
+\Name{M. Navascu\'{e}s, S. Pironio \and A. Ac\'{i}n}
+\href{http://iopscience.iop.org/1367-2630/10/7/073013}{\REVIEW{New J. Phys.}{10}{2008}{073013}}.
+
+\bibitem{Banik} 
+\Name{M. Banik} 
+\href{http://link.aps.org/doi/10.1103/PhysRevA.88.032118} {\REVIEW{Phys. Rev. A}{88}{2013}{032118}}. 
+
+\bibitem{Cheﬂes} 
+\Name{A. Cheﬂes} 
+\href{http://www.sciencedirect.com/science/article/pii/S0375960198000644} {\REVIEW{Phys. Lett. A}{239}{1998}{339}}. 
+
+
+\bibitem{Koh} 
+\Name{D. E. Koh \emph{et al.}}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.109.160404} {\REVIEW{Phys. Rev. Lett.}{109}{2012}{160404}}. 
+    
+
+\end{thebibliography}
+\section{Appendix}
+We use the perspective of the Eave's dropper to present the results. Eve prepares measurement apparatus for Alice. The optimization problem \ref{mdi_rand_quantum} can be seen as Eave's best strategy to increase the guessing probability  $p_q^*(ab|xy)$ of outcome $ab$ given inputs $xy$. We shall refer to the Shanon's entropy associated with $p_q^*(ab|xy)$ as $H(ab|xy)$. As all $p_q^*(ab|xy)>\frac{1}{2}$ we can write the min-entropy as,
+\begin{equation}
+H_\infty(AB|XY)=-\log_2\max_{ab}p_q^*(ab|xy)=\min_{ab}H(ab|xy)
+\end{equation}
+For all $v\in(1/3,1]$ without any extra condition Eave could always find $ab$ such that $H(ab|xy)$ is zero for both $Q_{1+AB}$ and no-signaling correlations which implies zero $H_\infty(AB|XY)$. However she gets positive $H(00|xy)$ when $x=y$ for some $v\in (1/3,1]$ (see \ref{plot2}).
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm,width=7cm]{nocond.pdf}
+\caption{The $H(00|x\neq y)$ statistics obtained by solving the optimization problem \ref{mdi_rand_quantum} of the form using $Q_{1+AB}$ level of NPA hierarchy (blue) and no-signaling (red) against visibility parameter $v$ along with $i=j=0$ in \ref{mdi-ew1}.}\label{plot2}
+\end{figure}
+Under the Conditions 1 and 2 $H(ab|x=y)$ statistics are given in Fig. \ref{plot2} and $H(ab|x\neq y)$ statistics are given in Fig. \ref{plot3}. Notice best strategy for (no-signaling or $Q_{1+AB}$) Eave in both the cases ($x=y$ or $x\neq y$) is to maximize the guessing probability of $p(01|xy)$ or $p(10|xy)$. 
+\begin{equation}
+H_\infty(AB|X=Y)=H(01|x=y)=H(10|x=y)
+\end{equation}
+
+\begin{equation}
+H_\infty(AB|X\neq Y)=H(01|x\neq y)=H(10|x\neq y)
+\end{equation}
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm,width=7cm]{xisy1.pdf}
+\includegraphics[height=5cm,width=7cm]{xisy2.pdf}
+\includegraphics[height=5cm,width=7cm]{xisy3.pdf}
+
+\caption{The $H(ab|x=y)$ statistics obtained by solving the optimization problem \ref{mdi_rand_quantum} of the form using $Q_{1+AB}$ level of NPA hierarchy (blue) and no-signaling (red) against visibility parameter $v$ along with $i=j=0$ in \ref{mdi-ew1}.}\label{plot2}
+\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[height=5cm,width=7cm]{xny1.pdf}
+\includegraphics[height=5cm,width=7cm]{xny2.pdf}
+\includegraphics[height=5cm,width=7cm]{xny3.pdf}
+
+\caption{The $H(ab|x=y)$ statistics obtained by solving the optimization problem \ref{mdi_rand_quantum} of the form using $Q_{1+AB}$ level of NPA hierarchy (blue) and no-signaling (red) against visibility parameter $v$ along with $i=j=0$ in \ref{mdi-ew1} and Conditions 1 and 2 hold.}\label{plot3}
+\end{figure}
+\end{document}
+
+
+
+
+
+
+\bibitem{Silman} 
+\Name{J. Silman, S. Pironio \and S. Massar}
+\href{http://link.aps.org/doi/10.1103/PhysRevLett.110.100504} {\REVIEW{Phys. Rev. Lett.}{110}{2013}{100504}}. 
+
+\bibitem{Silleras}  
+\Name{O. Nieto-Silleras, S. Pironio \and J. Silman}
+\href{http://arxiv.org/abs/1309.3930} {\REVIEW{New J. Phys.}{16}{2014}{013035}}. 
+
+\bibitem{Bancal} 
+\Name{J. Bancal, L. Sheridan \and V. Scarani} 
+\href{http://arxiv.org/abs/1309.3894} {\REVIEW{New J. Phys.}{16}{2014}{033011}}.
+
+\bibitem{b.a}
+  \Name{Author F., Author S. \and Author T.}
+  \REVIEW{Some Rev. A}{69}{1969}{9691}.
+
+\bibitem{b.b}
+  \Name{Author F. \and Author S.}
+  \Book{Some Book of Interest}
+  \Editor{A. Editor}
+  \Vol{9}
+  \Publ{Publishing house, City}
+  \Year{1939}
+  \Page{666}.
+
+\bibitem{b.c}
+  \Editor{Editor A.}
+  \Book{Some Book of Interest}
+  \Vol{9}
+  \Publ{Publishing house, City}
+  \Year{1939}
+  \Section{A}.
+  
+  
+  
+  
+  
+  \Name{D. Bouwmeester, A. K. Ekert \and A. Zeilinger}
+  \Book{The Physics of Quantum Information: Quantum Cryptography, Quantum Teleportation, Quantum Computation} \Publ{Springer}
+  \Year{2000}; 
+  \Name{D. J. Bernstein, J. Buchmann \and E. Dahmen}
+  \Book{Post-Quantum Cryptography} 
+  \Year{2009}
+  
+  
+  \Name{D. P. Landau \and K. Binder}
+  \Book{A Guide to Monte Carlo Simulations in Statistical Physics}
+  \Publ{Cambridge Univ. Press}
+  \Year{2000}
